@@ -1,0 +1,28 @@
+{
+  "name": "rest-api-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./bin/server.js"
+  },
+  "author": "Pedro Dousseau",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
+    "mongoose": "^5.7.4",
+    "swagger-ui-express": "^4.1.2",
+    "sync-request": "^6.1.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
