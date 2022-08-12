@@ -29,10 +29,10 @@ exports.post = async (req, res, next) => {
             roles: ["user"]
         });
 
-       /* emailService.send(
+       emailService.send(
             req.body.email,
             "Bem vindo ao Node API Test",
-            global.EMAIL_TMPL.replace('{0}', req.body.name));*/
+            `'Olá, <strong>${req.body.name}</strong>, seja bem-vindo'`);
 
         res.status(201).send({
             message: 'Usuário cadastrado com sucesso!'
@@ -77,7 +77,7 @@ exports.authenticate = async (req, res, next) => {
     }
     catch (error) {
         res.status(400).send({
-            message: 'Falha ao cadastrar usuário',
+            message: 'Falha ao autenticar usuário',
             error: error
         });
     }
@@ -108,7 +108,7 @@ exports.refreshToken = async (req, res, next) => {
         });
 
         res.status(201).send({
-            token: token,
+            token: newToken,
             data: {
                 email: user.email,
                 name: user.name

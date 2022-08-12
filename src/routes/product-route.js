@@ -7,7 +7,7 @@ const authService = require('../services/auth-service');
 
 router.get('/', controller.get);
 router.get('/:slug', controller.getBySlug);
-router.get('/admin/:id', controller.getById);
+router.get('/:id', controller.getById);
 router.get('/tags/:tag', controller.getByTag);
 router.post('/', authService.isAdmin, controller.post);
 router.put('/:id', authService.isAdmin, controller.put);

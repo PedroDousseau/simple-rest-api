@@ -20,7 +20,7 @@ exports.post = async (req, res, next) => {
         // get the token
         var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-        // descode token
+        // decode token
         var data = await authService.decodeToken(token);
 
         await repository.create({
