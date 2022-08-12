@@ -1,6 +1,6 @@
 # 📍 Simple REST API
 
-A Simple rest API project 🙂 <br>
+A simple REST API project 🙂 <br>
 It manipulates a fake business model with **Users**, **Products** and **Orders**.
 
 ## Built with
