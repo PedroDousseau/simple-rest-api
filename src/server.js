@@ -1,6 +1,8 @@
+import http from 'http';
+
 const debug = require('debug')('nodestr:server');
-const http = require('http');
-const app = require('../src/app');
+// const http = require('http');
+const app = require('./app');
 
 function normalizePort(val) {
   const port = parseInt(val, 10);

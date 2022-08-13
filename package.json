@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./bin/server.js"
+    "start": "babel-node src/server.js",
+    "dev" : "nodemon --exec npm start",
+    "build" : "babel src --out-dir dist"
   },
   "author": "Pedro Dousseau",
   "license": "ISC",
@@ -24,6 +26,10 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
     "eslint": "^8.21.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
