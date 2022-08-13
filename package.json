@@ -20,7 +20,7 @@
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
-    "mongoose": "^5.7.4",
+    "mongoose": "^5.7.5",
     "swagger-ui-express": "^4.1.2",
     "sync-request": "^6.1.0",
     "uuid": "^3.3.3"
