@@ -33,4 +33,4 @@ ValidationContract.prototype.clear = () => {
 
 ValidationContract.prototype.isValid = () => errors.length === 0;
 
-module.exports = ValidationContract;
+export default ValidationContract;

@@ -1,42 +1,42 @@
-const ValidationContract = require('../validators/fluent-validator');
-const repository = require('../repositories/product-repository');
+import ValidationContract from '../validators/fluent-validator';
+import Repository from '../repositories/product-repository';
 
-exports.get = async (req, res) => {
+export async function get(req, res) {
   try {
-    const data = await repository.get();
+    const data = await Repository.get();
     res.status(200).send(data);
   } catch (error) {
     res.status(500).send({
       message: 'Falha na requisição',
     });
   }
-};
+}
 
-exports.getBySlug = async (req, res) => {
+export async function getBySlug(req, res) {
   try {
-    const data = await repository.getBySlug(req.params.slug);
+    const data = await Repository.getBySlug(req.params.slug);
     res.status(200).send(data);
   } catch (error) {
     res.status(400).send({
       message: 'Falha na requisição',
     });
   }
-};
+}
 
-exports.getById = async (req, res) => {
+export async function getById(req, res) {
   try {
-    const data = await repository.getById(req.params.id);
+    const data = await Repository.getById(req.params.id);
     res.status(200).send(data);
   } catch (error) {
     res.status(400).send({
       message: 'Falha na requisição',
     });
   }
-};
+}
 
-exports.getByTag = async (req, res) => {
+export async function getByTag(req, res) {
   try {
-    const data = await repository.getByTag(req.params.tag);
+    const data = await Repository.getByTag(req.params.tag);
     res.status(200).send(data);
   } catch (error) {
     res.status(400).send({
@@ -44,9 +44,9 @@ exports.getByTag = async (req, res) => {
       data: error,
     });
   }
-};
+}
 
-exports.post = async (req, res) => {
+export async function post(req, res) {
   const contract = new ValidationContract();
 
   // list of validations on post request
@@ -61,7 +61,7 @@ exports.post = async (req, res) => {
   }
 
   try {
-    await repository.create(req.body);
+    await Repository.create(req.body);
     res.status(201).send({
       message: 'Produto cadastrado com sucesso!',
     });
@@ -71,11 +71,11 @@ exports.post = async (req, res) => {
       error,
     });
   }
-};
+}
 
-exports.put = async (req, res) => {
+export async function put(req, res) {
   try {
-    await repository.update(req.params.id, req.body);
+    await Repository.update(req.params.id, req.body);
     res.status(200).send({
       message: 'Produto atualizado com sucesso!',
     });
@@ -84,11 +84,11 @@ exports.put = async (req, res) => {
       message: 'Falha ao atualizar produto',
     });
   }
-};
+}
 
-exports.delete = async (req, res) => {
+export async function deleteProduct(req, res) {
   try {
-    await repository.delete(req.body.id);
+    await Repository.deleteProduct(req.body.id);
     res.status(200).send({
       message: 'Produto removido com sucesso!',
     });
@@ -98,4 +98,4 @@ exports.delete = async (req, res) => {
       data: error,
     });
   }
-};
+}

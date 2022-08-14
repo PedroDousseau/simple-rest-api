@@ -1,25 +1,27 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const User = mongoose.model('User');
 
-exports.create = async (data) => {
-  const user = new User(data);
+export default class UserRepository {
+  static async create(data) {
+    const user = new User(data);
 
-  await user.save();
-};
+    await user.save();
+  }
 
-exports.authenticate = async (data) => {
-  const res = await User
-    .findOne({
-      email: data.email,
-      password: data.password,
-    });
+  static async authenticate(data) {
+    const res = await User
+      .findOne({
+        email: data.email,
+        password: data.password,
+      });
 
-  return res;
-};
+    return res;
+  }
 
-exports.getById = async (id) => {
-  const res = await User.findById(id);
+  static async getById(id) {
+    const res = await User.findById(id);
 
-  return res;
-};
+    return res;
+  }
+}

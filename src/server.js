@@ -1,8 +1,6 @@
 import http from 'http';
-
-const debug = require('debug')('nodestr:server');
-// const http = require('http');
-const app = require('./app');
+import debug from 'debug';
+import app from './app';
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
@@ -18,6 +16,8 @@ function normalizePort(val) {
   return false;
 }
 
+const logger = debug('nodestr:server');
+
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -28,7 +28,7 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? `pipe ${addr}`
     : `port ${addr.port}`;
-  debug(`Listening on ${bind}`);
+  logger(`Listening on ${bind}`);
 }
 
 function onError(error) {

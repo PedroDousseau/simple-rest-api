@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
+import { post, authenticate, refreshToken } from '../controllers/user-controller';
+import AuthService from '../services/auth-service';
 
 const router = express.Router();
-const controller = require('../controllers/user-controller');
-const authService = require('../services/auth-service');
 
-router.post('/', controller.post);
-router.post('/authenticate', controller.authenticate);
-router.post('/refresh-token', authService.authorize, controller.refreshToken);
+router.post('/', post);
+router.post('/authenticate', authenticate);
+router.post('/refresh-token', AuthService.authorize, refreshToken);
 
-module.exports = router;
+export default router;

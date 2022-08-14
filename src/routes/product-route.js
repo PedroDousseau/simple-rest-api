@@ -1,15 +1,23 @@
-const express = require('express');
+import express from 'express';
+import {
+  get,
+  getBySlug,
+  getById,
+  getByTag,
+  post,
+  put,
+  deleteProduct,
+} from '../controllers/product-controller';
+import AuthService from '../services/auth-service';
 
 const router = express.Router();
-const controller = require('../controllers/product-controller');
-const authService = require('../services/auth-service');
 
-router.get('/', controller.get);
-router.get('/:slug', controller.getBySlug);
-router.get('/:id', controller.getById);
-router.get('/tags/:tag', controller.getByTag);
-router.post('/', authService.isAdmin, controller.post);
-router.put('/:id', authService.isAdmin, controller.put);
-router.delete('/', authService.isAdmin, controller.delete);
+router.get('/', get);
+router.get('/:slug', getBySlug);
+router.get('/:id', getById);
+router.get('/tags/:tag', getByTag);
+router.post('/', AuthService.isAdmin, post);
+router.put('/:id', AuthService.isAdmin, put);
+router.delete('/', AuthService.isAdmin, deleteProduct);
 
-module.exports = router;
+export default router;

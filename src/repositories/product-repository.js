@@ -1,64 +1,66 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 mongoose.set('useCreateIndex', true);
 
 const Product = mongoose.model('Product');
 
-exports.get = async () => {
-  const res = await Product
-    .find({
-      active: true,
-    }, 'title price slug');
+export default class ProductRepository {
+  static async get() {
+    const res = await Product
+      .find({
+        active: true,
+      }, 'title price slug');
 
-  return res;
-};
+    return res;
+  }
 
-exports.getBySlug = async (slug) => {
-  const res = await Product
-    .findOne({
-      slug,
-      active: true,
-    }, 'title description price slug tags');
+  static async getBySlug(slug) {
+    const res = await Product
+      .findOne({
+        slug,
+        active: true,
+      }, 'title description price slug tags');
 
-  return res;
-};
+    return res;
+  }
 
-exports.getById = async (id) => {
-  const res = await Product
-    .findById(id);
+  static async getById(id) {
+    const res = await Product
+      .findById(id);
 
-  return res;
-};
+    return res;
+  }
 
-exports.getByTag = async (tag) => {
-  const res = await Product
-    .find({
-      tags: tag,
-      active: true,
-    }, 'title description price slug tags');
+  static async getByTag(tag) {
+    const res = await Product
+      .find({
+        tags: tag,
+        active: true,
+      }, 'title description price slug tags');
 
-  return res;
-};
+    return res;
+  }
 
-exports.create = async (data) => {
-  const product = new Product(data);
+  static async create(data) {
+    const product = new Product(data);
 
-  await product.save();
-};
+    await product.save();
+  }
 
-exports.update = async (id, data) => {
-  await Product
-    .findByIdAndUpdate(id, {
-      $set: {
-        title: data.title,
-        description: data.description,
-        price: data.price,
-        slug: data.slug,
-      },
-    });
-};
+  static async update(id, data) {
+    await Product
+      .findByIdAndUpdate(id, {
+        $set: {
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          slug: data.slug,
+        },
+      });
+  }
 
-exports.delete = async (id) => {
-  await Product
-    .findOneAndRemove(id);
-};
+  static async deleteProduct(id) {
+    await Product
+      .findOneAndRemove(id);
+  }
+}

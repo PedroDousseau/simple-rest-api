@@ -1,11 +1,10 @@
-const md5 = require('md5');
-const ValidationContract = require('../validators/fluent-validator');
-const repository = require('../repositories/user-repository');
-const authService = require('../services/auth-service');
+import md5 from 'md5';
+import ValidationContract from '../validators/fluent-validator';
+import Repository from '../repositories/user-repository';
+import AuthService from '../services/auth-service';
+import EmailService from '../services/email-service';
 
-const emailService = require('../services/email-service');
-
-exports.post = async (req, res) => {
+export async function post(req, res) {
   const contract = new ValidationContract();
 
   // list of validations on post request
@@ -20,14 +19,14 @@ exports.post = async (req, res) => {
   }
 
   try {
-    await repository.create({
+    await Repository.create({
       name: req.body.name,
       email: req.body.email,
       password: md5(req.body.password + global.SALT_KEY),
       roles: ['user'],
     });
 
-    emailService.send(
+    EmailService.send(
       req.body.email,
       'Bem vindo ao Node API Test',
       `'Olá, <strong>${req.body.name}</strong>, seja bem-vindo'`,
@@ -42,11 +41,11 @@ exports.post = async (req, res) => {
       error,
     });
   }
-};
+}
 
-exports.authenticate = async (req, res) => {
+export async function authenticate(req, res) {
   try {
-    const user = await repository.authenticate({
+    const user = await Repository.authenticate({
       email: req.body.email,
       password: md5(req.body.password + global.SALT_KEY),
     });
@@ -58,7 +57,7 @@ exports.authenticate = async (req, res) => {
       return;
     }
 
-    const token = await authService.generateToken({
+    const token = await AuthService.generateToken({
       // eslint-disable-next-line no-underscore-dangle
       id: user._id,
       email: user.email,
@@ -79,17 +78,17 @@ exports.authenticate = async (req, res) => {
       error,
     });
   }
-};
+}
 
-exports.refreshToken = async (req, res) => {
+export async function refreshToken(req, res) {
   try {
     // get the token
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     // decode token
-    const data = await authService.decodeToken(token);
+    const data = await AuthService.decodeToken(token);
 
-    const user = await repository.getById(data.id);
+    const user = await Repository.getById(data.id);
 
     if (!user) {
       res.status(401).send({
@@ -98,7 +97,7 @@ exports.refreshToken = async (req, res) => {
       return;
     }
 
-    const newToken = await authService.generateToken({
+    const newToken = await AuthService.generateToken({
       // eslint-disable-next-line no-underscore-dangle
       id: user._id,
       email: user.email,
@@ -119,4 +118,4 @@ exports.refreshToken = async (req, res) => {
       error,
     });
   }
-};
+}

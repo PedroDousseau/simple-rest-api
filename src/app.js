@@ -1,7 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const config = require('./config');
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import config from './config';
+
+// load models (Todo: Find a way to not have unused-vars)
+import Product from './models/product';
+import Order from './models/order';
+import User from './models/user';
+
+// load routes
+import indexRoute from './routes/index-route';
+import productRoute from './routes/product-route';
+import userRoute from './routes/user-route';
+import orderRoute from './routes/order-route';
 
 const app = express();
 
@@ -10,17 +21,6 @@ mongoose.connect(config.connectiongString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-// load models
-require('./models/product');
-require('./models/user');
-require('./models/order');
-
-// load routes
-const indexRoute = require('./routes/index-route');
-const productRoute = require('./routes/product-route');
-const userRoute = require('./routes/user-route');
-const orderRoute = require('./routes/order-route');
 
 app.use(bodyParser.json({
   limit: '5mb',
@@ -42,4 +42,4 @@ app.use('/products', productRoute);
 app.use('/users', userRoute);
 app.use('/orders', orderRoute);
 
-module.exports = app;
+export default app;
