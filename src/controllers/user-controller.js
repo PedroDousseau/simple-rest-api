@@ -2,7 +2,7 @@ import md5 from 'md5';
 import ValidationContract from '../validators/fluent-validator';
 import Repository from '../repositories/user-repository';
 import AuthService from '../services/auth-service';
-import EmailService from '../services/email-service';
+// import EmailService from '../services/email-service';
 
 export async function post(req, res) {
   const contract = new ValidationContract();
@@ -26,11 +26,12 @@ export async function post(req, res) {
       roles: ['user'],
     });
 
-    EmailService.send(
-      req.body.email,
-      'Bem vindo ao Node API Test',
-      `'Olá, <strong>${req.body.name}</strong>, seja bem-vindo'`,
-    );
+    // Todo: Fix email sending
+    // EmailService.send(
+    //   req.body.email,
+    //   'Bem vindo ao Node API Test',
+    //   `'Olá, <strong>${req.body.name}</strong>, seja bem-vindo'`,
+    // );
 
     res.status(201).send({
       message: 'Usuário cadastrado com sucesso!',
