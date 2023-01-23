@@ -1,13 +1,23 @@
-# 📍 Simple REST API
+<h1 align="center">
+  ⭕ Simple REST API ⭕
+</h1>
 
-A simple REST API project 🙂 <br>
-It manipulates a fake business model with **Users**, **Products** and **Orders**.
+<h4 align="center">
+  A simple REST API project 🙂 <br>
+  It manipulates a fake business model with Users, Products and Orders.
+</h4>
+<br>
+<p align="center">
+  <a href="#-built-with">Built with</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-api-routes">API Routes</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-start">How to start</a>
+</p>
 
-## Built with
+## 📍 Built with
 - Express
 - Mongoose
 
-## API Routes
+## 📍 API Routes
 
 ### Users
 
@@ -36,7 +46,7 @@ It manipulates a fake business model with **Users**, **Products** and **Orders**
 | /orders | GET    | List all created orders |
 | /orders | POST   | Create a new order      |
 
-## How to start
+## 📍 How to start
 1. Add a config.js file at src/ with the following content:
 
 ```javascript
